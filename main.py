@@ -9,7 +9,7 @@ import random
 # Feel free to adjust the values to fit your needs
 
 WIDTH, HEIGHT = 800,600
-pygame.init()
+pygame.init()  # type: ignore
 
 pygame.display.set_caption('PLAYGROUND')
 
@@ -38,6 +38,11 @@ enemy_pos_y = 0 + enemy_size
 enemy_pos_x = 0 + enemy_size
 enemy_colour = RED
 
+player_width = 100
+player_height = 20
+player_pos_x = WIDTH//2 - player_width//2
+player_pos_y = HEIGHT - player_height
+
 
 while running:
     
@@ -46,20 +51,27 @@ while running:
     
     # Event handling
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+        if event.type == pygame.QUIT:  # type: ignore
             running = False
             break
    
     # Draw game:
     screen.fill(WHITE)
 
-    pygame.draw.circle(screen, enemy_colour, (enemy_pos_x, enemy_pos_y), enemy_size)
+
+    enemy1 = pygame.draw.circle(screen, enemy_colour, (int(enemy_pos_x), enemy_pos_y), enemy_size)
+    enemy2 = pygame.draw.circle(screen, enemy_colour, (int(enemy_pos_x + 200), enemy_pos_y), enemy_size)
+    enemy3 = pygame.draw.circle(screen, enemy_colour, (int(enemy_pos_x + 400), enemy_pos_y), enemy_size)
     enemy_pos_x += enemy_speed
 
-    if enemy_pos_x >= WIDTH - enemy_size or enemy_pos_x <= 0 + enemy_size:
-        enemy_speed *= -1 * 1.1
-        enemy_pos_y += random.randint(5,15)
+    if enemy_pos_x + 400 >= WIDTH - enemy_size or enemy_pos_x <= 0 + enemy_size:
+        enemy_speed *= -1*1.1
+        enemy_pos_y += random.randint(10,20)
         enemy_colour = random.choice(colours_list[1:])
+
+    # Draw Player
+
+    pygame.draw.rect(screen, BLUE, (player_pos_x, player_pos_y, player_width, player_height))
 
     # Finally: Update the display
     pygame.display.update()
@@ -67,5 +79,5 @@ while running:
 #END GAME LOOP
 
 
-pygame.quit()
+pygame.quit()  # type: ignore
 exit()

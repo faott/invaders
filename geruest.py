@@ -8,12 +8,14 @@ import pygame
 # Define height and width of the screen:
 # Feel free to adjust the values to fit your needs
 WIDTH, HEIGHT = 800,600
-pygame.init()
+
 # Screen variable used to draw on
 screen = pygame.display.set_mode((WIDTH,HEIGHT))
 
 # Set title of game window
 pygame.display.set_caption('PLAYGROUND')
+
+pygame.init()  # type: ignore
 
 # A few color definitions
 BLACK = (0,0,0)
@@ -40,7 +42,7 @@ while running:
     
     # Event handling
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+        if event.type == pygame.QUIT:  # type: ignore
             running = False
             break
    
@@ -57,5 +59,5 @@ while running:
 #END GAME LOOP
 
 
-pygame.quit()
+pygame.quit()  # type: ignore
 exit()
