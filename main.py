@@ -78,13 +78,13 @@ while running:
     move_x = 0
     move_y = 0
     
-    if keys[pygame.K_RIGHT] and not keys[pygame.K_LEFT]:
+    if keys[pygame.K_RIGHT] and not keys[pygame.K_LEFT]:  # type: ignore
         move_x = player_speed
-    if keys[pygame.K_LEFT] and not keys[pygame.K_RIGHT]:
+    if keys[pygame.K_LEFT] and not keys[pygame.K_RIGHT]:  # type: ignore
         move_x -= player_speed
-    if keys[pygame.K_UP] and not keys[pygame.K_DOWN] and player_pos_y > 0:
+    if keys[pygame.K_UP] and not keys[pygame.K_DOWN] and player_pos_y > 0:  # type: ignore
         move_y -= player_speed
-    if keys[pygame.K_DOWN] and not keys[pygame.K_UP] and player_pos_y + player_height < HEIGHT:
+    if keys[pygame.K_DOWN] and not keys[pygame.K_UP] and player_pos_y + player_height < HEIGHT:  # type: ignore
         move_y = player_speed
 
     player_pos_x += move_x
