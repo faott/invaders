@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <g transform="translate(97.981 -792.64)">
+  <path d="m-97.981 792.64h256v256h-256z" fill="#000018"/>
+  <path transform="translate(-96.981 772.64)" d="m241.5 58.75c0.31786 1.3986 4.7476 4.0808 4.1827 5.3992s-5.5624-0.0391-6.7943 0.69539-2.414 5.7763-3.8424 5.6464-1.6817-5.3022-2.7609-6.2469-6.2396-0.5109-6.5574-1.9095 4.523-3.2378 5.0879-4.5562-1.4422-6.092-0.21032-6.8265 4.4771 3.3011 5.9054 3.431 5.3482-3.2542 6.4274-2.3096-1.7561 5.278-1.4382 6.6766z" fill="#f1ef5d" fill-opacity=".575"/>
+  <g transform="translate(-2,.99996)">
+   <path d="m78.019 901.64h12v64h-12v-64z" fill="#61c715" fill-rule="evenodd" stroke="#282828" stroke-linejoin="round" stroke-width="4"/>
+   <path d="m110.02 913.64-4 8v52h12v-52l-4-8h-4z" fill="#38d2df" fill-rule="evenodd" stroke="#282828" stroke-linejoin="round" stroke-width="4"/>
+   <path d="m-29.981 901.64h12v64h-12v-64z" fill="#61c715" fill-rule="evenodd" stroke="#282828" stroke-linejoin="round" stroke-width="4"/>
+   <path d="m-53.981 913.64-4 8v52h12v-52l-4-8h-4z" fill="#38d2df" fill-rule="evenodd" stroke="#282828" stroke-linejoin="round" stroke-width="4"/>
+   <path d="m10.019 905.64-40 8.0053-20 20-20 40 40-20 40-0.00531 40 0.00531h40l40 20-20-40-20-20-40-8-40-0.00531z" fill="#ca220e" fill-rule="evenodd" stroke="#282828" stroke-linejoin="round" stroke-width="4"/>
+   <path d="m70.019 913.64v60l-20 20h-40l-20-20v-60l20-40 20-8 20 8 20 40z" fill="#ca220e" opacity=".99" stroke="#282828" stroke-linejoin="round" stroke-width="4"/>
+   <path d="m-9.9814 937.64 20 20" fill="#ca220e" stroke="#282828" stroke-dashoffset="162" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+   <path d="m50.019 909.64v24l-12 4h-16l-12-4v-24l4-20 8-8h16l8 8 4 20z" fill="#444" opacity=".99" stroke="#282828" stroke-linejoin="round" stroke-width="4"/>
+   <path d="m-9.9814 949.64 20 20" fill="#ca220e" stroke="#282828" stroke-dashoffset="162" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+   <path d="m-29.991 889.64h4.0093v8h-4.0093z" fill="#05b40c"/>
+   <path d="m-21.991 889.64h4.0093v8h-4.0093z" fill="#05b40c"/>
+   <path d="m-29.991 877.64h4.0093v8h-4.0093z" fill="#05b40c"/>
+   <path d="m-21.991 877.64h4.0093v8h-4.0093z" fill="#05b40c"/>
+   <path d="m-29.981 865.64h4.0093v8h-4.0093z" fill="#05b40c"/>
+   <path d="m-21.981 865.64h4.0093v8h-4.0093z" fill="#05b40c"/>
+   <path d="m-29.981 853.64h4.0093v8h-4.0093z" fill="#05b40c"/>
+   <path d="m-21.981 853.64h4.0093v8h-4.0093z" fill="#05b40c"/>
+   <path d="m-29.981 841.64h4.0093v8h-4.0093z" fill="#05b40c"/>
+   <path d="m-21.981 841.64h4.0093v8h-4.0093z" fill="#05b40c"/>
+   <path d="m-29.981 829.64h4.0093v8h-4.0093z" fill="#05b40c"/>
+   <path d="m-21.981 829.64h4.0093v8h-4.0093z" fill="#05b40c"/>
+   <path d="m-29.972 817.64h4.0093v8h-4.0093z" fill="#05b40c"/>
+   <path d="m-21.972 817.64h4.0093v8h-4.0093z" fill="#05b40c"/>
+   <path d="m-29.972 805.64h4.0093v8h-4.0093z" fill="#05b40c"/>
+   <path d="m-21.972 805.64h4.0093v8h-4.0093z" fill="#05b40c"/>
+   <path d="m78.019 889.64h4.0093v8h-4.0093z" fill="#05b40c"/>
+   <path d="m86.019 889.64h4.0093v8h-4.0093z" fill="#05b40c"/>
+   <path d="m78.019 877.64h4.0093v8h-4.0093z" fill="#05b40c"/>
+   <path d="m86.019 877.64h4.0093v8h-4.0093z" fill="#05b40c"/>
+   <path d="m78.028 865.64h4.0093v8h-4.0093z" fill="#05b40c"/>
+   <path d="m86.028 865.64h4.0093v8h-4.0093z" fill="#05b40c"/>
+   <path d="m78.028 853.64h4.0093v8h-4.0093z" fill="#05b40c"/>
+   <path d="m86.028 853.64h4.0093v8h-4.0093z" fill="#05b40c"/>
+   <path d="m78.028 841.64h4.0093v8h-4.0093z" fill="#05b40c"/>
+   <path d="m86.028 841.64h4.0093v8h-4.0093z" fill="#05b40c"/>
+   <path d="m78.028 829.64h4.0093v8h-4.0093z" fill="#05b40c"/>
+   <path d="m86.028 829.64h4.0093v8h-4.0093z" fill="#05b40c"/>
+   <path d="m78.037 817.64h4.0093v8h-4.0093z" fill="#05b40c"/>
+   <path d="m86.037 817.64h4.0093v8h-4.0093z" fill="#05b40c"/>
+   <path d="m78.037 805.64h4.0093v8h-4.0093z" fill="#05b40c"/>
+   <path d="m86.037 805.64h4.0093v8h-4.0093z" fill="#05b40c"/>
+   <path transform="scale(-1,1)" d="m49.981 805.64h4v104h-4z" fill="#16edff" opacity=".99"/>
+   <path transform="scale(-1,1)" d="m-114.02 805.64h4v104h-4z" fill="#16edff" opacity=".99"/>
+   <path d="m70.019 937.64-20 20" fill="#ca220e" stroke="#282828" stroke-dashoffset="162" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+   <path d="m70.019 949.64-20 20" fill="#ca220e" stroke="#282828" stroke-dashoffset="162" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+   <path d="m70.019 961.64-20 20" fill="#ca220e" stroke="#282828" stroke-dashoffset="162" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+   <path d="m-9.9814 961.64 20 20" fill="#ca220e" stroke="#282828" stroke-dashoffset="162" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+   <path d="m10.019 973.64-20 20v40l20-20h40l20 20v-36l-20-24-40-4e-5z" fill="#ca220e" fill-rule="evenodd" stroke="#282828" stroke-linejoin="round" stroke-width="4"/>
+   <path d="m-9.9814 925.64 20 20" fill="#ca220e" stroke="#282828" stroke-dashoffset="162" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+   <path d="m70.019 925.64-20 20" fill="#ca220e" stroke="#282828" stroke-dashoffset="162" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+  </g>
+  <path transform="matrix(.78976 .61341 -.61341 .78976 -145.2 620.8)" d="m241.5 58.75c0.31786 1.3986 4.7476 4.0808 4.1827 5.3992s-5.5624-0.0391-6.7943 0.69539-2.414 5.7763-3.8424 5.6464-1.6817-5.3022-2.7609-6.2469-6.2396-0.5109-6.5574-1.9095 4.523-3.2378 5.0879-4.5562-1.4422-6.092-0.21032-6.8265 4.4771 3.3011 5.9054 3.431 5.3482-3.2542 6.4274-2.3096-1.7561 5.278-1.4382 6.6766z" fill="#f1ef5d" fill-opacity=".575"/>
+  <path transform="matrix(-.56274 1.1196 -1.1196 -.56274 151.51 781.3)" d="m241.5 58.75c0.31786 1.3986 4.7476 4.0808 4.1827 5.3992s-5.5624-0.0391-6.7943 0.69539-2.414 5.7763-3.8424 5.6464-1.6817-5.3022-2.7609-6.2469-6.2396-0.5109-6.5574-1.9095 4.523-3.2378 5.0879-4.5562-1.4422-6.092-0.21032-6.8265 4.4771 3.3011 5.9054 3.431 5.3482-3.2542 6.4274-2.3096-1.7561 5.278-1.4382 6.6766z" fill="#f1ef5d" fill-opacity=".575"/>
+ </g>
+</svg>
