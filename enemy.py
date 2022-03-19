@@ -3,6 +3,9 @@ from random import randint, choice
 from constansts import *
 
 
+
+
+
 class Enemy:
     def __init__(self, x, y, speed, size, colour=RED):
         self.x = x
@@ -22,4 +25,6 @@ class Enemy:
 
     def draw(self, screen):
 
-        pygame.draw.circle(screen, self.colour, (int(self.x), self.y), self.size)
+        enemy = pygame.image.load("media/enemy1_30.png").convert_alpha()
+        screen.blit(enemy, (self.x, self.y))
+        # pygame.draw.circle(screen, self.colour, (int(self.x), self.y), self.size)

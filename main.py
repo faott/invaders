@@ -30,7 +30,7 @@ background = pygame.image.load("media/background.png").convert_alpha()
 running = True
 
 player1 = Player(70, 70)
-enemy1 = Enemy(50, 30, 15, 20)
+enemy1 = Enemy(50, 30, 5, 20)
 
 shots = []
 
