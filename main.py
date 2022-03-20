@@ -1,3 +1,4 @@
+import math
 import pygame
 import random
 from constansts import *
@@ -23,31 +24,78 @@ clock = pygame.time.Clock()
 background = pygame.image.load("media/background.png").convert_alpha()
 
 
+
+
+
 # ---------
 # GAME LOOP
 # ---------
 
 running = True
 
-player1 = Player(70, 70)
-enemy1 = Enemy(50, 30, 5, 20)
+player1 = Player(50, 50)
+# enemy1 = Enemy(50, 30, 5, 30)
 
 shots = []
+enemys = []
+enemy_offset = 0
+
+for x in range(3):
+    enemy = Enemy(0 + enemy_offset, 30, 5, 30)
+    enemys.append(enemy)
+    enemy_offset += 100
+
+
+def collision(cx1, cx2, cy1, cy2, r1, r2):
+    dx = cx2 - cx1
+    dy = cy2 - cy1
+
+    distance = math.sqrt(dx * dx + dy * dy)
+
+    if distance <= r1 + r2:
+        return True
+    else:
+        return False
+
+enemy_shooting = pygame.USEREVENT + 1
+pygame.time.set_timer(enemy_shooting, random.randint(900, 1500))
+
 
 while running:
     
-    # Limit the framerate to 30 frames per second
     clock.tick(30)
-    
+    screen.blit(background, (0,0))
+
+    shots_left = []
+    enemys_left = []
+
     # Event handling
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:  # type: ignore
             running = False
             break
-        if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-            shot = Rockets(player1.x + player1.width/2, player1.y, -15, 10)
-            shots.append(shot)
-   
+
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:  # type: ignore
+            player1_shot = Rockets(player1.x + player1.width/2, player1.y - 32, -15, 5)
+            shots.append(player1_shot)
+
+    # Enemy shots
+
+        if event.type == enemy_shooting and enemys:
+            shooter = random.choice(enemys)
+            enemy_shot = Rockets(shooter.x + shooter.size/2, shooter.y + shooter.size + 5, 15, 5)
+            shots.append(enemy_shot)
+    
+   # Enemy shots alternative
+
+    for e in enemys:
+        if random.randint(1,50) == 2:
+            enemy_shot = Rockets(e.x + e.size/2, e.y + e.size + 5, 15, 5)
+            shots.append(enemy_shot)
+
+   # Player movement
+
     player1.vx = 0
     player1.vy = 0
     keys = pygame.key.get_pressed()
@@ -61,36 +109,54 @@ while running:
     elif keys[pygame.K_DOWN] and not keys[pygame.K_UP]:  # type: ignore
         player1.vy = player1.speed
 
-    # Draw game:
-    screen.blit(background, (0,0))
-
     player1.update()
     player1.draw(screen)
 
-    enemy1.update()
-    enemy1.draw(screen)
+    # Checking the shots and the enemys for collision
 
     for s in shots:
-        shot.update()
+        if collision((player1.x + player1.width / 2), s.x, (player1.y + player1.height / 2), s.y, player1.width, s.size):
+            pygame.quit()
+            exit()
 
-    shots_left = []
+        else:
+            for e in enemys:
+                if collision(e.x, s.x, e.y, s.y, e.size, s.size):
+                    s.destroyed = True
+                    e.destroyed = True
+                else:
+                    pass
+
+    # Updating position and state of the shots
+
     for s in shots:
-        if not shot.destroyed:
+        s.update()
+        if not s.destroyed:
             shots_left.append(s)
 
     shots = shots_left
-
+    
     for s in shots:
-        shot.draw(screen)
+        s.draw(screen)
+
+    # Updating the position and state of the enemys
+
+    for e in enemys:
+        e.update()
+        if not e.destroyed:
+            enemys_left.append(e)
+
+    enemys = enemys_left
+ 
+    for e in enemys:
+        e.draw(screen)
+
+    
 
 #    pygame.draw.circle(screen, enemy_colour, (int(enemy_pos_x + 200), enemy_pos_y), enemy_size)
 #    pygame.draw.circle(screen, enemy_colour, (int(enemy_pos_x + 400), enemy_pos_y), enemy_size)
 
-    # Finally: Update the display
     pygame.display.update()
     
-#END GAME LOOP
-
-
-pygame.quit()  # type: ignore
+pygame.quit()
 exit()

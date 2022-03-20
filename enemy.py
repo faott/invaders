@@ -13,12 +13,13 @@ class Enemy:
         self.speed = speed
         self.size = size
         self.colour = colour
+        self.destroyed = False
 
     def update(self):
 
         self.x += self.speed
 
-        if self.x >= WIDTH - self.size or self.x <= 0 + self.size:
+        if self.x >= WIDTH - self.size or self.x <= 0:
             self.speed *= -1*1.1
             self.y += randint(10,20)
             self.colour = choice(colours_list[1:])

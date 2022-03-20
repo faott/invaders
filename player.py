@@ -30,4 +30,6 @@ class Player:
 
     def draw(self, screen):
 
-        pygame.draw.rect(screen, self.colour, (self.x, self.y, self.width, self.height))
+        player = pygame.image.load("media/player1_50.png").convert_alpha()
+        # pygame.draw.rect(screen, self.colour, (self.x, self.y, self.width, self.height))
+        screen.blit(player, (self.x, self.y))
