@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg6203"
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15)"
+   sodipodi:docname="game_over.svg">
+  <defs
+     id="defs6197">
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient6053"
+       id="linearGradient6147"
+       x1="420.03329"
+       y1="129.14192"
+       x2="440.05298"
+       y2="129.14192"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(-0.08337167,0.17910565,-0.17910565,-0.08337167,185.89309,48.559092)" />
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient6053">
+      <stop
+         style="stop-color:#f1ef5d;stop-opacity:1;"
+         offset="0"
+         id="stop6049" />
+      <stop
+         style="stop-color:#f1ef5d;stop-opacity:0;"
+         offset="1"
+         id="stop6051" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient6053"
+       id="linearGradient6059"
+       x1="418.7869"
+       y1="67.66851"
+       x2="438.74243"
+       y2="67.66851"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.15694677,-0.21300716,0.21300716,0.15694677,16.430522,190.2555)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient6053"
+       id="linearGradient6139"
+       x1="315.61853"
+       y1="74.847557"
+       x2="340.11566"
+       y2="74.847557"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.21608593,-0.15268008,0.15268008,0.21608593,-2.1717699,136.65366)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient6053"
+       id="linearGradient6088"
+       gradientUnits="userSpaceOnUse"
+       x1="418.7869"
+       y1="67.66851"
+       x2="438.74243"
+       y2="67.66851"
+       gradientTransform="matrix(0.11923025,0,0,0.11923025,86.857736,95.037213)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient6053"
+       id="linearGradient6118"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.10322942,-0.05966188,0.05966188,0.10322942,69.291446,121.54536)"
+       x1="418.7869"
+       y1="67.66851"
+       x2="438.74243"
+       y2="67.66851" />
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter2889"
+       x="-0.24756305"
+       width="1.4951261"
+       y="-0.24356883"
+       height="1.4871377">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.40097885"
+         id="feGaussianBlur2891" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter2893"
+       x="-0.18390502"
+       width="1.36781"
+       y="-0.18240811"
+       height="1.3648162">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.40097885"
+         id="feGaussianBlur2895" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter2897"
+       x="-0.14893861"
+       width="1.2978772"
+       y="-0.14466616"
+       height="1.2893323">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.40097885"
+         id="feGaussianBlur2899" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter2901"
+       x="-0.40446679"
+       width="1.8089336"
+       y="-0.40858935"
+       height="1.8171787">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.40097885"
+         id="feGaussianBlur2903" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter2905"
+       x="-0.411468"
+       width="1.822936"
+       y="-0.40305372"
+       height="1.8061074">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.40097885"
+         id="feGaussianBlur2907" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.8"
+     inkscape:cx="471.70987"
+     inkscape:cy="507.79502"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="3390"
+     inkscape:window-height="1378"
+     inkscape:window-x="50"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata6200">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="opacity:1">
+    <path
+       d="M 69.437259,93.207509 H 149.43726 V 153.20751 H 69.437259 Z"
+       fill="#000018"
+       id="path5874"
+       style="fill:#000018;fill-opacity:0.901818;stroke-width:0.264583"
+       inkscape:export-filename="/home/fabian/Dokumente/Python/Klubschule/invaders/media/background.png"
+       inkscape:export-xdpi="254.00002"
+       inkscape:export-ydpi="254.00002" />
+    <path
+       d="m 126.77327,116.01099 c -0.277,-0.0597 -1.12671,0.51009 -1.31575,0.299 -0.18903,-0.21109 0.47075,-0.993 0.44191,-1.27487 -0.0289,-0.28188 -0.83331,-0.91394 -0.69096,-1.15895 0.14236,-0.245 1.08986,0.14085 1.34904,0.0263 0.25917,-0.11453 0.61171,-1.07495 0.8887,-1.01527 0.277,0.0597 0.20282,1.08004 0.39186,1.29114 0.18903,0.21109 1.21135,0.24959 1.2402,0.53146 0.0289,0.28188 -0.96451,0.52666 -1.10686,0.77164 -0.14234,0.24499 0.13696,1.22921 -0.1222,1.34374 -0.25916,0.11454 -0.79891,-0.75456 -1.07591,-0.81423 z"
+       fill="#f1ef5d"
+       fill-opacity="0.575"
+       id="path5876"
+       style="opacity:0.47061638;fill:url(#linearGradient6147);fill-opacity:1;stroke-width:0.264583;filter:url(#filter2889)"
+       inkscape:export-filename="/home/fabian/Dokumente/Python/Klubschule/invaders/media/background.png"
+       inkscape:export-xdpi="254.00002"
+       inkscape:export-ydpi="254.00002" />
+    <path
+       d="m 99.513295,109.00309 c 0.18157,0.33323 1.502425,0.69742 1.453385,1.07383 -0.049,0.37632 -1.419065,0.39027 -1.679875,0.66591 -0.2608,0.27565 -0.19901,1.64441 -0.57205,1.71411 -0.373026,0.0697 -0.809676,-1.229 -1.152416,-1.39188 -0.34275,-0.16288 -1.62544,0.31887 -1.80698,-0.0144 -0.18155,-0.33324 0.91864,-1.14982 0.96761,-1.52615 0.049,-0.37632 -0.80554,-1.44732 -0.54473,-1.72297 0.2608,-0.27564 1.37743,0.51837 1.75044,0.44867 0.37301,-0.0697 1.127566,-1.21337 1.470306,-1.05051 0.34274,0.16285 -0.0674,1.47019 0.11421,1.80341 z"
+       fill="#f1ef5d"
+       fill-opacity="0.575"
+       id="path5980"
+       style="opacity:0.47061638;fill:url(#linearGradient6059);fill-opacity:1;stroke-width:0.264582;filter:url(#filter2893)"
+       inkscape:export-filename="/home/fabian/Dokumente/Python/Klubschule/invaders/media/background.png"
+       inkscape:export-xdpi="254.00002"
+       inkscape:export-ydpi="254.00002" />
+    <path
+       d="m 80.628043,104.70987 c -0.442857,0.17321 -1.103642,1.75784 -1.563749,1.6377 -0.460111,-0.12016 -0.261632,-1.82557 -0.563217,-2.19321 -0.30158,-0.36762 -2.012855,-0.50641 -2.040757,-0.98112 -0.02788,-0.47471 1.65535,-0.81295 1.911822,-1.21339 0.256476,-0.40042 -0.14037,-2.07086 0.302481,-2.244058 0.442848,-0.173207 1.284679,1.323118 1.744786,1.443268 0.460107,0.12015 1.92609,-0.77342 2.227688,-0.40578 0.30158,0.36763 -0.861362,1.6307 -0.833476,2.10537 0.02788,0.47468 1.330768,1.59283 1.074323,1.99326 -0.256435,0.40042 -1.817028,-0.31532 -2.259877,-0.14209 z"
+       fill="#f1ef5d"
+       fill-opacity="0.575"
+       id="path5982"
+       style="opacity:0.47061638;fill:url(#linearGradient6139);fill-opacity:1;stroke-width:0.331541;filter:url(#filter2897)"
+       inkscape:export-filename="/home/fabian/Dokumente/Python/Klubschule/invaders/media/background.png"
+       inkscape:export-xdpi="254.00002"
+       inkscape:export-ydpi="254.00002" />
+    <path
+       d="m 138.54413,103.45933 c -0.0724,0.15494 0.14859,0.73149 -0.001,0.81431 -0.14962,0.0828 -0.52092,-0.4105 -0.69063,-0.43143 -0.16972,-0.0209 -0.64977,0.36736 -0.77478,0.25066 -0.125,-0.1167 0.22943,-0.62227 0.19691,-0.79015 -0.0325,-0.16789 -0.55018,-0.50445 -0.47782,-0.65939 0.0724,-0.15494 0.66271,0.0259 0.81233,-0.0569 0.14961,-0.0828 0.30974,-0.67913 0.47946,-0.65819 0.16972,0.0209 0.18015,0.63828 0.30514,0.75498 0.12499,0.11669 0.74161,0.0847 0.77414,0.2526 0.0325,0.16787 -0.55137,0.36856 -0.62373,0.5235 z"
+       fill="#f1ef5d"
+       fill-opacity="0.575"
+       id="path5980-7"
+       style="opacity:0.47061638;fill:url(#linearGradient6088);fill-opacity:1;stroke-width:0.264583;filter:url(#filter2901)"
+       inkscape:export-filename="/home/fabian/Dokumente/Python/Klubschule/invaders/media/background.png"
+       inkscape:export-xdpi="254.00002"
+       inkscape:export-ydpi="254.00002" />
+    <path
+       d="m 118.25581,102.97376 c 0.0149,0.17035 0.49468,0.55896 0.40656,0.70556 -0.0881,0.14658 -0.65641,-0.0947 -0.81383,-0.0279 -0.15742,0.0668 -0.37875,0.6432 -0.54537,0.60471 -0.16662,-0.0385 -0.11274,-0.65356 -0.22491,-0.78264 -0.11217,-0.12908 -0.72876,-0.16145 -0.74364,-0.33181 -0.0149,-0.17035 0.58673,-0.30918 0.67483,-0.45575 0.0881,-0.14658 -0.0717,-0.74298 0.0858,-0.80978 0.15742,-0.0668 0.47537,0.46248 0.64198,0.50097 0.16661,0.0385 0.68448,-0.29774 0.79665,-0.16868 0.11217,0.12907 -0.29296,0.59501 -0.27807,0.76537 z"
+       fill="#f1ef5d"
+       fill-opacity="0.575"
+       id="path5980-7-5"
+       style="opacity:0.47061638;fill:url(#linearGradient6118);fill-opacity:1;stroke-width:0.264583;filter:url(#filter2905)"
+       inkscape:export-filename="/home/fabian/Dokumente/Python/Klubschule/invaders/media/background.png"
+       inkscape:export-xdpi="254.00002"
+       inkscape:export-ydpi="254.00002" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.5833px;line-height:1.25;font-family:Uroob;-inkscape-font-specification:'Uroob, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#808000;stroke-width:0.264583;opacity:0.66824873;"
+       x="74.026894"
+       y="124.91184"
+       id="text2911"><tspan
+         sodipodi:role="line"
+         id="tspan2909"
+         x="74.026894"
+         y="124.91184"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.5833px;font-family:Uroob;-inkscape-font-specification:'Uroob, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#808000;stroke-width:0.264583;">Game Over</tspan></text>
+  </g>
+</svg>
