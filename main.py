@@ -36,14 +36,24 @@ player1 = Player(50, 50)
 
 shots = []
 enemys = []
-enemy_offset = 0
+
+# Initial definition to limit shooting rate of player
+loaded = True
 score = 0
 
 
+def player_shoot():
+    global loaded
+    if loaded:
+        shots.append(Rockets(player1.x + player1.width/2, player1.y - 32, -15, 5, colour="WHITE"))
+        loaded = False
 
-for x in range(random.randint(5,5)):
-    enemys.append(Enemy(0 + enemy_offset, 30, 5, 30))
-    enemy_offset += 100
+ 
+def spawn_enemys():
+    enemy_offset = 0
+    for x in range(random.randint(5,5)):
+        enemys.append(Enemy(0 + enemy_offset, 30, 5, 30))
+        enemy_offset += 100
 
 
 def collision(cx1, cx2, cy1, cy2, r1, r2):
@@ -57,10 +67,22 @@ def collision(cx1, cx2, cy1, cy2, r1, r2):
     else:
         return False
 
+# Initial spawn of enemy- set
+
+spawn_enemys()
+
+# Defining User-events
+
 enemy_shooting = pygame.USEREVENT + 1
 pygame.time.set_timer(enemy_shooting, random.randint(900, 1500))
 
+enemy_spawn = pygame.USEREVENT + 2
+pygame.time.set_timer(enemy_spawn, 5000)
 
+# Reload the players gun
+
+reload = pygame.USEREVENT + 3
+pygame.time.set_timer(reload, 800)
 
 
 while running:
@@ -70,7 +92,7 @@ while running:
 
     shots_left = []
     enemys_left = []
-
+ 
     # Event handling
 
     for event in pygame.event.get():
@@ -79,8 +101,16 @@ while running:
             break
 
         if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:  # type: ignore
-            player1_shot = Rockets(player1.x + player1.width/2, player1.y - 32, -15, 5)
-            shots.append(player1_shot)
+            player_shoot()
+
+    # Enemy spawn   
+  
+        if event.type == enemy_spawn:
+            spawn_enemys()
+
+        if event.type == reload:
+            loaded = True
+
 
     # Enemy shots
 
@@ -95,7 +125,7 @@ while running:
         if random.randint(1,50) == 2:
             enemy_shot = Rockets(e.x + e.size/2, e.y + e.size + 5, 15, 5)
             shots.append(enemy_shot)
-
+ 
    # Player movement reset to zero
 
     player1.vx = 0

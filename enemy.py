@@ -21,7 +21,7 @@ class Enemy:
 
         if self.x >= WIDTH - self.size or self.x <= 0:
             self.speed *= -1*1.1
-            self.y += randint(10,20)
+            self.y += randint(30,50)
             self.colour = choice(colours_list[1:])
 
     def draw(self, screen):

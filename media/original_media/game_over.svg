@@ -186,7 +186,7 @@
        fill="#000018"
        id="path5874"
        style="fill:#000018;fill-opacity:0.901818;stroke-width:0.264583"
-       inkscape:export-filename="/home/fabian/Dokumente/Python/Klubschule/invaders/media/background.png"
+       inkscape:export-filename="/home/fabian/Dokumente/Python/Klubschule/invaders/media/game_over.png"
        inkscape:export-xdpi="254.00002"
        inkscape:export-ydpi="254.00002" />
     <path
@@ -195,7 +195,7 @@
        fill-opacity="0.575"
        id="path5876"
        style="opacity:0.47061638;fill:url(#linearGradient6147);fill-opacity:1;stroke-width:0.264583;filter:url(#filter2889)"
-       inkscape:export-filename="/home/fabian/Dokumente/Python/Klubschule/invaders/media/background.png"
+       inkscape:export-filename="/home/fabian/Dokumente/Python/Klubschule/invaders/media/game_over.png"
        inkscape:export-xdpi="254.00002"
        inkscape:export-ydpi="254.00002" />
     <path
@@ -204,7 +204,7 @@
        fill-opacity="0.575"
        id="path5980"
        style="opacity:0.47061638;fill:url(#linearGradient6059);fill-opacity:1;stroke-width:0.264582;filter:url(#filter2893)"
-       inkscape:export-filename="/home/fabian/Dokumente/Python/Klubschule/invaders/media/background.png"
+       inkscape:export-filename="/home/fabian/Dokumente/Python/Klubschule/invaders/media/game_over.png"
        inkscape:export-xdpi="254.00002"
        inkscape:export-ydpi="254.00002" />
     <path
@@ -213,7 +213,7 @@
        fill-opacity="0.575"
        id="path5982"
        style="opacity:0.47061638;fill:url(#linearGradient6139);fill-opacity:1;stroke-width:0.331541;filter:url(#filter2897)"
-       inkscape:export-filename="/home/fabian/Dokumente/Python/Klubschule/invaders/media/background.png"
+       inkscape:export-filename="/home/fabian/Dokumente/Python/Klubschule/invaders/media/game_over.png"
        inkscape:export-xdpi="254.00002"
        inkscape:export-ydpi="254.00002" />
     <path
@@ -222,7 +222,7 @@
        fill-opacity="0.575"
        id="path5980-7"
        style="opacity:0.47061638;fill:url(#linearGradient6088);fill-opacity:1;stroke-width:0.264583;filter:url(#filter2901)"
-       inkscape:export-filename="/home/fabian/Dokumente/Python/Klubschule/invaders/media/background.png"
+       inkscape:export-filename="/home/fabian/Dokumente/Python/Klubschule/invaders/media/game_over.png"
        inkscape:export-xdpi="254.00002"
        inkscape:export-ydpi="254.00002" />
     <path
@@ -231,7 +231,7 @@
        fill-opacity="0.575"
        id="path5980-7-5"
        style="opacity:0.47061638;fill:url(#linearGradient6118);fill-opacity:1;stroke-width:0.264583;filter:url(#filter2905)"
-       inkscape:export-filename="/home/fabian/Dokumente/Python/Klubschule/invaders/media/background.png"
+       inkscape:export-filename="/home/fabian/Dokumente/Python/Klubschule/invaders/media/game_over.png"
        inkscape:export-xdpi="254.00002"
        inkscape:export-ydpi="254.00002" />
     <text
@@ -239,7 +239,10 @@
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.5833px;line-height:1.25;font-family:Uroob;-inkscape-font-specification:'Uroob, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#808000;stroke-width:0.264583;opacity:0.66824873;"
        x="74.026894"
        y="124.91184"
-       id="text2911"><tspan
+       id="text2911"
+       inkscape:export-filename="/home/fabian/Dokumente/Python/Klubschule/invaders/media/game_over.png"
+       inkscape:export-xdpi="254.00002"
+       inkscape:export-ydpi="254.00002"><tspan
          sodipodi:role="line"
          id="tspan2909"
          x="74.026894"
