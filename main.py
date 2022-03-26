@@ -5,6 +5,7 @@ from constansts import *
 from player import Player
 from enemy import Enemy
 from rockets import Rockets
+from vector import Vector
 
 
 # --------------
@@ -23,6 +24,22 @@ clock = pygame.time.Clock()
 
 background = pygame.image.load("media/background.png").convert_alpha()
 game_over_surf = pygame.image.load("media/game_over.png").convert_alpha()
+
+enemy_list = [
+pygame.image.load("media/enemy1_30.png").convert_alpha(),
+pygame.image.load("media/enemy2_30.png").convert_alpha(),
+pygame.image.load("media/enemy3_30.png").convert_alpha(), 
+pygame.image.load("media/enemy4_30.png").convert_alpha(),
+]
+
+# ---------
+# TO DOE
+
+# enemy imag in enemy class einbauen 
+# player loaded attribut in player class einabuen
+
+
+
 
 
 # ---------
@@ -52,11 +69,11 @@ def player_shoot():
 def spawn_enemys():
     enemy_offset = 0
     for x in range(random.randint(5,5)):
-        enemys.append(Enemy(0 + enemy_offset, 30, 5, 30))
+        enemys.append(Enemy(0 + enemy_offset, 30, 5, 30, enemy_list[random.randint(0,3)])) # MIt len(liste) Methode anpassen
         enemy_offset += 100
 
 
-def collision(cx1, cx2, cy1, cy2, r1, r2):
+def collision_shots(cx1, cx2, cy1, cy2, r1, r2):   
     dx = cx2 - cx1
     dy = cy2 - cy1
 
@@ -66,6 +83,29 @@ def collision(cx1, cx2, cy1, cy2, r1, r2):
         return True
     else:
         return False
+
+def collision_player(rect, shot):
+
+    if type(rect) is Player:
+
+        nx = max(rect.x , min(shot.x , rect.x + rect.width))
+        ny = max(rect.y , min(shot.y , rect.y + rect.height))
+
+        dx = nx - shot.x
+        dy = ny - shot.y
+        
+        distance = math.sqrt(dx * dx + dy * dy)
+
+        if distance < shot.size:
+            return True
+    
+        else:
+            return False
+    else:
+        pass
+
+
+    
 
 # Initial spawn of enemy- set
 
@@ -147,14 +187,15 @@ while running:
     # Checking the shots if they collide with the player
 
     for s in shots:
-        if collision((player1.x + player1.width / 2), s.x, (player1.y + player1.height / 2), s.y, player1.width / 2, s.size):
+        if collision_player(player1, s):
+        #if collision_shots((player1.x + player1.width / 2), s.x, (player1.y + player1.height / 2), s.y, player1.width / 2, s.size):
             pygame.quit()
             exit()
 
     # Checking if the shots collide with enemys but only if the shots are go upwards (no enemy friendly fire)
         else:
             for e in enemys:
-                if collision(e.x, s.x, e.y, s.y, e.size, s.size) and s.speed < 0:
+                if collision_shots(e.x, s.x, e.y, s.y, e.size, s.size) and s.speed < 0:
                     s.destroyed = True
                     e.destroyed = True
                     score += 1
