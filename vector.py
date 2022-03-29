@@ -1,4 +1,3 @@
-from re import A
 import pygame
 import math
 
@@ -12,7 +11,7 @@ class Vector:
         return math.sqrt(self.x^2 + self.y^2)
 
     def leght_squared(self):
-        pass
+        return self.x + self.x * self.y + self.y
 
     def add(self, other):
         return Vector(self.x + other.x, self.y + other.y)
@@ -33,22 +32,8 @@ class Vector:
         return self.sub(other)
 
     def __mul__(self, other):
-        pass
-        
+        if isinstance(other, int):
+            return self.scale(other)        
 
     def __rmul__(self, other):
-        return Vector
-    
-
-
-
-
-a = Vector(1,1)
-b = Vector(2,2)
-
-print(a == b)
-
-print(a.x,a.y)
-print(b.x,b.y)
-
-# print(c.x,c.y)
+        return self.__mul__(other)

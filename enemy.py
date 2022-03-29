@@ -1,5 +1,6 @@
 import pygame
 from random import randint, choice
+from rockets import Rockets
 from constansts import *
 
 
@@ -28,9 +29,12 @@ class Enemy:
     def draw(self, screen):
 
         screen.blit(self.type, (self.x, self.y))
-        # pygame.draw.circle(screen, self.colour, (int(self.x), self.y), self.size)
 
+    def shoot(self, shots):
 
+        enemy_shot = Rockets(self.x + self.size/2, self.y + self.size + 5, 15, 5)
+        shots.append(enemy_shot)
 
+        return shots
 
 

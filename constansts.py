@@ -1,3 +1,5 @@
+import pygame
+
 
 WIDTH, HEIGHT = 800,600
 
@@ -12,3 +14,4 @@ GRAY = (100,100,100)
 ORANGE = (242, 90, 15)
 
 colours_list = [WHITE, BLACK, RED, GREEN, BLUE, GRAY, ORANGE]
+
