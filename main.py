@@ -1,6 +1,7 @@
 import math
 import pygame
 import random
+from enum import Enum
 from constansts import *
 from player import Player
 from enemy import Enemy
@@ -52,22 +53,44 @@ mute_rect = mute_surf.get_rect(midbottom = (WIDTH/2, HEIGHT-20))
 # end_sound = pygame.mixer.Sound("sound/ending.wav")
 # title_sound = pygame.mixer.Sound("sound/title_screen.wav")
 
-def play_music(command):
+class GameState(Enum):
+    MUTED = 0
+    START = 1
+    END = 2
+    LEVEL = 3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def play_music(state):
    
     pygame.mixer.music.set_volume(0.3)
-
     playing_state = pygame.mixer.music.get_busy()
     print(playing_state)
 
-    if command == "mute_unmute" and playing_state:
+    if state == GameState.MUTED and playing_state:
         pygame.mixer.music.stop()
         pygame.mixer.music.unload()
-    if command == "play":
+
+    if state == GameState.START:
         pygame.mixer.music.load("sound/level_1.wav")
         pygame.mixer.music.play(-1)
-    if command == "mute_unmute" and not playing_state:
+
+    if state == GameState.MUTED and not playing_state:
         pygame.mixer.music.load("sound/level_1.wav")
         pygame.mixer.music.play(-1)
+        
 
 
 # ---------
@@ -76,6 +99,7 @@ def play_music(command):
 
 # Changing the Sound according to the Game States
 # Creating different game states Menu, play, Game over
+# collision object überarbeiten
 
 
 # ---------
@@ -93,29 +117,20 @@ def start_game():
     return True
 
 def spawn_enemys():
-    enemy_offset = 0
+    enemy_offset = Vector(0,0)
     for x in range(random.randint(2,5)):
-        enemys.append(Enemy(0 + enemy_offset, 30, 5, 30, random.choice(enemy_img_list)))
-        enemy_offset += 100
+        enemy_type = random.choice(enemy_img_list)
+        enemy_pos = Vector(30,0)
+        enemys.append(Enemy(enemy_pos + enemy_offset, 5, 30, enemy_type))
+        enemy_offset.x += 100
 
 
-def collision_shots(cx1, cx2, cy1, cy2, r1, r2):   
-    dx = cx2 - cx1
-    dy = cy2 - cy1
+def collition_shot(object, shot):
 
-    distance = math.sqrt(dx * dx + dy * dy)
+    if type(object) is Player:
 
-    if distance <= r1 + r2:
-        return True
-    else:
-        return False
-
-def collision_player(rect, shot):
-
-    if type(rect) is Player:
-
-        nx = max(rect.x , min(shot.x , rect.x + rect.width))
-        ny = max(rect.y , min(shot.y , rect.y + rect.height))
+        nx = max(object.pos.x , min(shot.x , object.pos.x + object.width))
+        ny = max(object.pos.y , min(shot.y , object.pos.y + object.height))
 
         dx = nx - shot.x
         dy = ny - shot.y
@@ -126,8 +141,24 @@ def collision_player(rect, shot):
             shots.remove(shot)
             player1.hit(screen)
     else:
-        pass
+        dx = (object.pos.x + object.size//2) - shot.x
+        dy = (object.pos.y + object.size//2) - shot.y
 
+        distance = math.sqrt(dx * dx + dy * dy)
+
+        if distance <= object.size + shot.size:
+            return True
+        else:
+            return False
+
+
+
+
+def collision_object(enemy, player):
+    enemy_rect = enemy.type.get_rect(topleft = (200, 50))
+    player_rect = player.player1_img.get_rect(topleft = (400, 550))
+    if enemy_rect.colliderect(player_rect):
+        player1.lives = 0
 
 
 # ---------
@@ -157,7 +188,7 @@ music_mute = False
 # GAME MUSIC
 # ---------
 
-play_music("play")
+play_music(GameState.START)
 
 
 # ---------
@@ -174,7 +205,7 @@ while True:
         screen.blit(instruction_surf, (80, 200))
         screen.blit(replay_surf, (80,225))
         screen.blit(mute_surf, mute_rect)
-        player1.draw(default_font, screen, 375, 275)
+        player1.draw(default_font, screen)
    
     shots_left = []
     enemys_left = []
@@ -192,7 +223,7 @@ while True:
             click = pygame.mouse.get_pressed(3)
 
             if event.type == pygame.MOUSEBUTTONDOWN and mute_rect.collidepoint(mouse_pos):
-                play_music(command="mute_unmute")
+                play_music(GameState.MUTED)
 
             if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:  # type: ignore
                 running = start_game()
@@ -216,36 +247,47 @@ while True:
     if running:
 
         # Player movement reset to zero
-        player1.vx = 0  
-        player1.vy = 0
+        #player1.vx = 0  
+        #player1.vy = 0
+
+        #player1.move = Vector(0, 0)
+        player1.move.x, player1.move.y = 0, 0
 
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_RIGHT] and not keys[pygame.K_LEFT]:  # type: ignore
-            player1.vx = player1.speed
+            #player1.vx = player1.speed
+            player1.move.x = player1.speed
         elif keys[pygame.K_LEFT] and not keys[pygame.K_RIGHT]:  # type: ignore
-            player1.vx = -player1.speed
+            #player1.vx = -player1.speed
+            player1.move.x =- player1.speed
         elif keys[pygame.K_UP] and not keys[pygame.K_DOWN]:  # type: ignore
-            player1.vy = -player1.speed
+            #player1.vy = -player1.speed
+            player1.move.y =- player1.speed
         elif keys[pygame.K_DOWN] and not keys[pygame.K_UP]:  # type: ignore
-            player1.vy = player1.speed
+            #player1.vy = player1.speed
+            player1.move.y = player1.speed
 
         player1.update()
-        player1.draw(default_font, screen, player1.x, player1.y)
+        player1.draw(default_font, screen)
 
         # Checking the shots if they collide with the player
 
         for s in shots:
-            collision_player(player1, s)
+            collition_shot(player1, s)
 
             # Checking if the shots collide with enemys but only if the shots are go upwards (no enemy friendly fire)
             for e in enemys:
-                if collision_shots(e.x, s.x, e.y, s.y, e.size, s.size) and s.speed < 0:
+                if collition_shot(e, s) and s.speed < 0:
                     s.destroyed = True
                     e.destroyed = True
                     player1.score += 1
                 else:
                     pass
+        
+        for e in enemys:
+            collision_object(e, player1)
+
 
         # Updating position and state of the shots
         for s in shots:
@@ -254,7 +296,7 @@ while True:
                 shots_left.append(s)
 
         shots = shots_left
-        
+
         for s in shots:
             s.draw(screen)
 
@@ -273,6 +315,6 @@ while True:
     if player1.lives == 0:
         running = False
         screen.blit(game_over_surf, (120,400))
-        player1.draw(default_font, screen, 375, 275)
+        player1.draw(default_font, screen)
 
     pygame.display.update()
