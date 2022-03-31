@@ -13,6 +13,13 @@ from vector import Vector
 # INITIALIZATION
 # --------------
 
+class Game:
+    def __init__(self, players, enemys ):
+        self.state = {'start_menu': True, 'level1': False, 'game_over': False, 'muted': False, 'paused':False}
+        self.difficulty = 0
+        pass
+
+
 pygame.init()  # type: ignore
 
 pygame.display.set_caption('INVADERS')
@@ -100,6 +107,7 @@ def play_music(state):
 # Changing the Sound according to the Game States
 # Creating different game states Menu, play, Game over
 # collision object überarbeiten
+# change enemy do rect
 
 
 # ---------
@@ -123,6 +131,11 @@ def spawn_enemys():
         enemy_pos = Vector(30,0)
         enemys.append(Enemy(enemy_pos + enemy_offset, 5, 30, enemy_type))
         enemy_offset.x += 100
+
+def pause_game(paused):
+        while not paused:
+            pygame.time.wait(1000)
+            return True
 
 
 def collition_shot(object, shot):
@@ -183,6 +196,8 @@ enemys = []
 shots = []
 running = False
 music_mute = False
+paused = False
+
 
 # ---------
 # GAME MUSIC
@@ -233,6 +248,9 @@ while True:
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:  # type: ignore
                 player1.shoot(shots)
 
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_p:
+                paused = not paused
+
             # Enemy spawn
             if event.type == enemy_spawn:
                 spawn_enemys()
@@ -244,14 +262,9 @@ while True:
             if event.type == enemy_shooting and enemys:
                 random.choice(enemys).shoot(shots)
         
-    if running:
+    if running and not paused:
 
-        # Player movement reset to zero
-        #player1.vx = 0  
-        #player1.vy = 0
-
-        #player1.move = Vector(0, 0)
-        player1.move.x, player1.move.y = 0, 0
+        player1.move = Vector(0, 0)
 
         keys = pygame.key.get_pressed()
 

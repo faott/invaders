@@ -9,7 +9,7 @@ class Player:
     def __init__(self, width, height):
         self.width = width
         self.height = height
-        self.pos = Vector(WIDTH//2 - 25, HEIGHT - 50)
+        self.pos = Vector(WIDTH//2 - 25, HEIGHT - 200)
         self.x = WIDTH // 2 - self.width // 2
         self.y = HEIGHT - self.height
         self.move = Vector(0,0)
@@ -32,8 +32,6 @@ class Player:
     def update(self):
 
         self.pos += self.move
-        #self.x += self.vx
-        #self.y += self.vy
 
         if self.pos.x < 0:
             self.pos.x = WIDTH - self.width
