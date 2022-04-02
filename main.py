@@ -2,11 +2,10 @@ import math
 import pygame
 import random
 from constansts import *
-from player import Player
+from player import *
 from enemy import Enemy
 from rockets import Rockets
 from vector import Vector
-
 
 # --------------
 # INITIALIZATION
@@ -21,8 +20,6 @@ class Game:
         self.enemys = []
         self.shots = []
 
-        #self.players = players
-
         pygame.init()  # type: ignore
 
         pygame.display.set_caption('INVADERS')
@@ -31,6 +28,7 @@ class Game:
         self.clock = pygame.time.Clock()
 
         self.background_surf = pygame.image.load("media/background2.png").convert_alpha()
+        self.background_menu = pygame.image.load("media/background3.png").convert_alpha()
 
         self.title_font = pygame.font.Font("font/AnachronautRegular-5VRB.ttf", 70)
         self.default_font = pygame.font.Font("font/Uroob-Regular.ttf", 15)
@@ -44,31 +42,31 @@ class Game:
         self.mute_surf = pygame.image.load("media/mute.png").convert_alpha()
         self.mute_rect = self.mute_surf.get_rect(midbottom = (WIDTH/2, HEIGHT-20))
 
-        self.enemy_img_1 = pygame.image.load("media/enemy1_30.png").convert_alpha()
-        self.enemy_img_2 = pygame.image.load("media/enemy2_30.png").convert_alpha()
-        self.enemy_img_3 = pygame.image.load("media/enemy3_30.png").convert_alpha()
-        self.enemy_img_4 = pygame.image.load("media/enemy4_30.png").convert_alpha()
-
-        self.enemy_img_list = [self.enemy_img_1, self.enemy_img_2, self.enemy_img_3, self.enemy_img_4]
-
-
     def draw_start_screen(self):
 
+        self.screen.blit(self.background_menu, (0,0))
         self.screen.blit(self.titel_surf, (60, 80))
         self.screen.blit(self.instruction_surf, (80, 200))
         self.screen.blit(self.replay_surf, (80,225))
         self.screen.blit(self.mute_surf, self.mute_rect)
-        player1.draw(self.default_font, self.screen)
 
-    def draw_hud(self):
-        pass
+        self.screen.blit(player.image, (80, 280))           # type: ignore
+
+    def draw_hud(self, score, lives):
+
+        score_surf = self.default_font.render(f"Score: {score}", True, WHITE)
+        lives_surf = self.default_font.render(f"Lives: {lives}", True, WHITE)   
+        self.screen.blit(score_surf, (20, 580))
+        self.screen.blit(lives_surf, (730, 580))     
+
 
     def draw_game_over(self):
-        game.state['run'] = False
+
+        self.screen.blit(self.background_menu, (0,0))
         game.screen.blit(game.game_over_surf, (60, 80))
         self.screen.blit(self.instruction_surf, (80, 200))
         self.screen.blit(self.replay_surf, (80,225))
-        player1.draw(game.default_font, game.screen)
+        #player.draw(game.default_font, game.screen)
 
     def play_music(self):
    
@@ -106,26 +104,65 @@ class Game:
 
         game.state['start_menu'] = False
         game.state['run'] = True
-        player1.lives = 3
-        player1.score = 0
-        game.shots.clear()
-        game.enemys.clear()
-        self.spawn_enemys()
+        player.lives = 3
+        player.score = 0
+        #game.shots.clear()
+        #game.enemys.clear()
+        #self.spawn_enemys()
 
 
     def spawn_enemys(self):
         enemy_offset = Vector(0,0)
         for x in range(random.randint(2,5)):
-            enemy_type = random.choice(self.enemy_img_list)
+            #enemy_type = random.choice(self.enemy_img_list)
+            enemy_type = 1
             enemy_pos = Vector(30,0)
-            self.enemys.append(Enemy(enemy_pos + enemy_offset, 5, 30, enemy_type))
+            enemy_grp.add(Enemy(enemy_pos + enemy_offset, 5, 30, enemy_type))
+            #self.enemys.append(Enemy(enemy_pos + enemy_offset, 5, 30, enemy_type))
             enemy_offset.x += 100
+
+    def collision_player_enemy(self):
+
+        collitions = pygame.sprite.groupcollide(player_grp, enemy_grp, False, True)
+
+        if collitions:
+            player.hit(self.screen)
+
+
+    def collision_player_shots(self):
+
+        collitions = pygame.sprite.groupcollide(enemy_grp, player_shot_grp, True, True)
+
+        hits = collitions.keys()
+        
+        for enemy in hits:
+            Enemy.hit(enemy, game.screen)  # type: ignore
+            player.score += 1
+
+        
+    def collision_enemy_shots(self):
+
+        collitions = pygame.sprite.groupcollide(player_grp, enemy_shot_grp, False, True)
+
+        hits = collitions.keys()
+        
+        for enemy in hits:
+            Player.hit(player, game.screen)  # type: ignore
+
+
 
 
 
 game = Game()
 
-player1 = Player(50, 50)
+player_grp = pygame.sprite.GroupSingle()
+player = Player()
+player_grp.add(player)
+
+enemy_grp = pygame.sprite.Group()
+
+enemy_shot_grp = pygame.sprite.Group()
+player_shot_grp = pygame.sprite.Group()
 
 game.play_music()
 
@@ -135,8 +172,6 @@ game.play_music()
 
 # Changing the Sound according to the Game States
 # Creating different game states Menu, play, Game over
-# collision object überarbeiten
-# change enemy do rect
 
 
 # ---------
@@ -144,39 +179,39 @@ game.play_music()
 # ---------
 
 
-def collition_shot(object, shot):
+# def collition_shot(object, shot):
 
-    if type(object) is Player:
+#     if type(object) is Player:
 
-        nx = max(object.pos.x , min(shot.x , object.pos.x + object.width))
-        ny = max(object.pos.y , min(shot.y , object.pos.y + object.height))
+#         nx = max(object.rect.x , min(shot.x , object.rect.x + object.width)) # type: ignore
+#         ny = max(object.rect.y , min(shot.y , object.rect.y + object.height)) # type: ignore
 
-        dx = nx - shot.x
-        dy = ny - shot.y
+#         dx = nx - shot.x
+#         dy = ny - shot.y
         
-        distance = math.sqrt(dx * dx + dy * dy)
+#         distance = math.sqrt(dx * dx + dy * dy)
 
-        if distance < shot.size:
-            game.shots.remove(shot)
-            player1.hit(game.screen)
-    else:
-        dx = (object.pos.x + object.size//2) - shot.x
-        dy = (object.pos.y + object.size//2) - shot.y
+#         if distance < shot.size:
+#             game.shots.remove(shot)
+#             player.hit(game.screen)
+#     else:
+#         dx = (object.rect.x + object.size//2) - shot.x
+#         dy = (object.rect.y + object.size//2) - shot.y
 
-        distance = math.sqrt(dx * dx + dy * dy)
+#         distance = math.sqrt(dx * dx + dy * dy)
 
-        if distance <= object.size + shot.size:
-            return True
-        else:
-            return False
+#         if distance <= object.size + shot.size:
+#             return True
+#         else:
+#             return False
 
 
-def collision_object(enemy, player):
-    enemy_rect = enemy.type.get_rect(topleft = (200, 50))
-    player_rect = player.player1_img.get_rect(topleft = (400, 550))
-    if enemy_rect.colliderect(player_rect):
-        player1.lives = 0
+# def collision_object():
 
+
+#     if pygame.sprite.groupcollide(player_grp, enemy_grp, False, False):
+#         print('collision')
+        #player.lives = 0
 
 # ---------
 # USER EVENTS
@@ -202,30 +237,75 @@ pygame.time.set_timer(reload, 800)
 while True:
 
     game.clock.tick(30)
-    game.screen.blit(game.background_surf, (0,0))
+
+    # Draw the main menu
 
     if game.state['start_menu']:
         game.draw_start_screen()
-   
-    shots_left = []
-    enemys_left = []
 
-    # Event handling
+    # Stop game if game over
+
+    if player.lives == 0:
+        game.state['run'] = False
+        game.draw_game_over()
+
+    # Draw the active game loop while playing
+
+    if game.state['run'] and not game.state['paused']:
+
+        player.vel = Vector(0,0)
+
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_RIGHT] and not keys[pygame.K_LEFT]:  # type: ignore
+            player.vel.x = player.speed
+
+
+        elif keys[pygame.K_LEFT] and not keys[pygame.K_RIGHT]:  # type: ignore
+            player.vel.x =- player.speed
+
+        elif keys[pygame.K_UP] and not keys[pygame.K_DOWN]: 
+            player.vel.y =- player.speed
+
+        elif keys[pygame.K_DOWN] and not keys[pygame.K_UP]:  # type: ignore
+            player.vel.y = player.speed
+
+        game.screen.blit(game.background_surf, (0,0))  
+
+        player_grp.update()
+        player_grp.draw(game.screen)
+
+        game.draw_hud(player.score, player.lives)
+
+        enemy_grp.update()
+        enemy_grp.draw(game.screen)
+
+        player_shot_grp.update()
+        player_shot_grp.draw(game.screen)
+
+        enemy_shot_grp.update()
+        enemy_shot_grp.draw(game.screen)
+
+        game.collision_player_enemy()
+        game.collision_player_shots()
+        game.collision_enemy_shots()
+
+    # ---------
+    # EVENT HANDLING
+    # ---------
 
     for event in pygame.event.get():
 
         if event.type == pygame.QUIT:  # type: ignore
             pygame.quit()
             exit()
-
-
         
         if not game.state['run']:
 
-            mouse_pos = pygame.mouse.get_pos()
+            mouse_vel = pygame.mouse.get_pos()
             click = pygame.mouse.get_pressed(3)
 
-            if event.type == pygame.MOUSEBUTTONDOWN and game.mute_rect.collidepoint(mouse_pos):
+            if event.type == pygame.MOUSEBUTTONDOWN and game.mute_rect.collidepoint(mouse_vel):
                 game.mute()
 
             if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:  # type: ignore
@@ -235,7 +315,7 @@ while True:
         if game.state['run']:
             
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:  # type: ignore
-                player1.shoot(game.shots)
+                player.shoot(player_shot_grp)
 
             if event.type == pygame.KEYDOWN and event.key == pygame.K_p:
                 pass
@@ -246,79 +326,11 @@ while True:
                 game.spawn_enemys()
 
             if event.type == reload:
-                player1.loaded = True
+                player.loaded = True
 
             # Choose a random enemy and shoot
-            if event.type == enemy_shooting and game.enemys:
-                random.choice(game.enemys).shoot(game.shots)
-        
-    
-    if game.state['run'] and not game.state['paused']:
-
-        player1.move = Vector(0, 0)
-
-        keys = pygame.key.get_pressed()
-
-        if keys[pygame.K_RIGHT] and not keys[pygame.K_LEFT]:  # type: ignore
-            player1.move.x = player1.speed
-
-        elif keys[pygame.K_LEFT] and not keys[pygame.K_RIGHT]:  # type: ignore
-            player1.move.x =- player1.speed
-
-        elif keys[pygame.K_UP] and not keys[pygame.K_DOWN]:  # type: ignore
-            player1.move.y =- player1.speed
-
-        elif keys[pygame.K_DOWN] and not keys[pygame.K_UP]:  # type: ignore
-            player1.move.y = player1.speed
-
-        player1.update()
-        player1.draw(game.default_font, game.screen)
-
-        # Checking the shots if they collide with the player
-
-        for s in game.shots:
-            collition_shot(player1, s)
-
-            # Checking if the shots collide with enemys but only if the shots are go upwards (no enemy friendly fire)
-            for e in game.enemys:
-                if collition_shot(e, s) and s.speed < 0:
-                    s.destroyed = True
-                    e.destroyed = True
-                    player1.score += 1
-                else:
-                    pass
-        
-        for e in game.enemys:
-            collision_object(e, player1)
-
-
-        # Updating position and state of the shots
-        for s in game.shots:
-            s.update()
-            if not s.destroyed:
-                shots_left.append(s)
-
-        game.shots = shots_left
-
-        for s in game.shots:
-            s.draw(game.screen)
-
-        # Updating the position and state of the enemys
-        for e in game.enemys:
-            e.update()
-            if not e.destroyed:
-                enemys_left.append(e)
-
-        game.enemys = enemys_left
-    
-        for e in game.enemys:
-            e.draw(game.screen)
-
-    # Stop game if game over
-    if player1.lives == 0:
-        game.draw_game_over()
-
-    
-
-
+            if event.type == enemy_shooting and enemy_grp:
+                enemy = random.choice(enemy_grp.sprites())
+                enemy.shoot(enemy_shot_grp)                 # type: ignore
+  
     pygame.display.update()

@@ -1,21 +1,36 @@
 import pygame
 from constansts import *
+from vector import Vector
 
 
-class Rockets:
-    def __init__(self, x, y, speed, size, colour=ORANGE):
-        self.x = x
-        self.y = y
-        self.speed = speed
-        self.size = size
+class Rockets(pygame.sprite.Sprite):
+
+    def __init__(self, pos, speed, colour, sprite_group):
+
+        # Passing the Argument Sprite Group to parent class (--> main.py)
+        
+        super().__init__(sprite_group)
+
+        self.pos = pos
         self.colour = colour
-        self.destroyed = False
+
+        self.vel = Vector(0,speed)
+
+        self.image = pygame.Surface((5,5))
+        self.image.fill(colour)
+        self.rect = self.image.get_rect(center=(self.pos[0], self.pos[1]))
+
+        self.sprite_group = sprite_group
+
+        #pygame.sprite.Group.add(self.sprite_group, self)
+    
+
 
     def update(self):
-        self.y += self.speed
-        if self.y < 0 or self.y > HEIGHT:
-            self.destroyed = True
 
-    def draw(self, screen):
+        self.rect.move_ip(self.vel.x, self.vel.y)                   # type: ignore
 
-        pygame.draw.circle(screen, self.colour, (self.x, self.y), self.size)
+        if self.rect.bottom < 0 or self.rect.top > HEIGHT:          # type: ignore
+            pygame.sprite.Group.remove(self.sprite_group, self)
+
+
