@@ -1,7 +1,7 @@
 import pygame
 from random import randint, choice
 from rockets import Rockets
-from constansts import *
+from settings import *
 from vector import Vector
 
 
@@ -18,18 +18,12 @@ class Enemy(pygame.sprite.Sprite):
         self.destroyed = False
         self.vel = Vector(0,0)
 
-        self.enemy_img_1 = pygame.image.load("media/enemy1_30.png").convert_alpha()
-        self.enemy_img_2 = pygame.image.load("media/enemy2_30.png").convert_alpha()
-        self.enemy_img_3 = pygame.image.load("media/enemy3_30.png").convert_alpha()
-        self.enemy_img_4 = pygame.image.load("media/enemy4_30.png").convert_alpha()
-
-        self.enemy_img_list = [self.enemy_img_1, self.enemy_img_2, self.enemy_img_3, self.enemy_img_4]
-
-        self.image = choice(self.enemy_img_list)
+        # Media path stored in settings.py
+        self.image = pygame.image.load(choice(enemy__icon_small)).convert_alpha()
         self.rect = self.image.get_rect(topleft=(self.pos.x, self.pos.y))
 
         # Copy from playerclass ----> CHANGE
-        self.explosion_img = pygame.image.load("media/explosion.png").convert_alpha()
+        self.explosion_img = pygame.image.load(explosion['player1']).convert_alpha()
         self.shoot_sound = pygame.mixer.Sound("sound/player_shoot.wav")
         self.explosion_sound = pygame.mixer.Sound("sound/explosion.wav")
         self.shoot_sound.set_volume(0.25)
@@ -44,9 +38,6 @@ class Enemy(pygame.sprite.Sprite):
             self.speed *= -1*1.1
             self.rect.y += randint(30,50)   # type: ignore
 
-    def draw(self, screen):
-
-        screen.blit(self.image, self.rect)
 
     def shoot(self, sprite_group):
 
@@ -58,3 +49,18 @@ class Enemy(pygame.sprite.Sprite):
         screen.blit(self.explosion_img, (self.rect.x - 30, self.rect.y - 30)) # type: ignore
 
 
+class BossEnemy(pygame.sprite.Sprite):
+
+    def __init__(self, pos, sprite_group):
+
+        super().__init__(sprite_group)
+
+        self.image = pygame.image.load(enemy__icon_boss[0]).convert_alpha()
+        self.rect = self.image.get_rect(center=(pos))
+        self.lives = 10
+        self.pos = pos
+
+    def update(self):
+
+        self.pos += Vector(0,5)
+    

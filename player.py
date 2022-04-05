@@ -1,12 +1,12 @@
 import pygame
-from constansts import *
+from settings import *
 from rockets import Rockets
 from vector import Vector
 
 
 class Player(pygame.sprite.Sprite):
     
-    def __init__(self):
+    def __init__(self, ship='default'):
 
         super().__init__()
 
@@ -16,9 +16,11 @@ class Player(pygame.sprite.Sprite):
         self.reloadtime = 800
         self.lives = 3
         self.score = 0
+        self.ship = ship
+        self.last_ship = self.ship
         
-        self.explosion_img = pygame.image.load("media/explosion.png").convert_alpha()
-        self.image = pygame.image.load("media/player1_50.png").convert_alpha()
+        self.explosion_img = pygame.image.load(explosion['enemy']).convert_alpha()
+        self.image = pygame.image.load(player_icon[ship]).convert_alpha()
         self.rect = self.image.get_rect(center=(WIDTH//2, HEIGHT - 100))
         self.shoot_sound = pygame.mixer.Sound("sound/player_shoot.wav")
         self.explosion_sound = pygame.mixer.Sound("sound/explosion.wav")
@@ -26,6 +28,11 @@ class Player(pygame.sprite.Sprite):
         self.explosion_sound.set_volume(0.25)
 
     def update(self):
+
+        if self.ship != self.last_ship:
+            actual_pos = (self.rect.centerx, self.rect.centery)     # type: ignore
+            self.image = pygame.image.load(player_icon[self.ship]).convert_alpha()
+            self.rect = self.image.get_rect(center=(actual_pos))
 
         self.rect.move_ip(self.vel.x, self.vel.y)  # type: ignore
 
@@ -41,6 +48,9 @@ class Player(pygame.sprite.Sprite):
         if self.rect.bottom > 600:      # type: ignore
             self.rect.bottom = 600      # type: ignore
     
+
+
+
     def shoot(self, sprite_group):
 
         if self.loaded:
@@ -55,4 +65,5 @@ class Player(pygame.sprite.Sprite):
         self.lives -= 1
 
         screen.blit(self.explosion_img, (self.rect.x - 30, self.rect.y - 30)) # type: ignore
+
 
