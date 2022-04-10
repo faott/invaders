@@ -1,8 +1,8 @@
 import pygame
 import random
-from settings import *
+from constants import *
 from player import *
-from enemy import Enemy
+from enemy import Enemy, BossEnemy
 from rockets import Rockets
 from vector import Vector
 from debug import debug
@@ -35,8 +35,8 @@ class Game:
         self.state = {'start_menu': True, 'run':False, 'game_over': False, 'muted': False, 'paused':False}
         self.level = 1
         self.difficulty = 0
-        self.enemys = []
-        self.shots = []
+        #self.enemys = []
+        #self.shots = []
         self.show_info = False
         self.ship = ship
        
@@ -44,10 +44,10 @@ class Game:
         self.background_menu = pygame.image.load("media/background3.png").convert_alpha()
 
         self.title_font = pygame.font.Font("font/AnachronautRegular-5VRB.ttf", 70)
-        self.default_font = pygame.font.Font("font/Uroob-Regular.ttf", 15)
+        self.default_font = pygame.font.Font("font/Uroob-Regular.ttf", 25)
 
         self.replay_surf = self.default_font.render("Press <ENTER> to Start/Restart!", True, WHITE)
-        self.game_over_surf = self.title_font.render("Game Over", True, RED)
+        self.game_over_surf = self.title_font.render("Game Over", True, WHITE)
         self.paused_surf = self.title_font.render("Paused", True, WHITE)
 
     def draw_hud(self, score, lives):
@@ -55,30 +55,24 @@ class Game:
         score_surf = self.default_font.render(f"Score: {score}", True, WHITE)
         lives_surf = self.default_font.render(f"Lives: {lives}", True, WHITE)   
         screen.blit(score_surf, (20, 580))
-        screen.blit(lives_surf, (730, 580))     
-
-    def draw_game_over(self):
- 
-        screen.blit(self.background_menu, (0,0))
-        screen.blit(self.game_over_surf, (60, 80))
-        #self.screen.blit(self.instruction_surf, (80, 200))
-        screen.blit(self.replay_surf, (80,225))
-        #player.draw(game.default_font, game.screen)
+        screen.blit(lives_surf, (730, 580))
 
     def play_music(self):
-   
+        
         pygame.mixer.music.set_volume(0.3)
         
+
         if self.state['start_menu']:
-            pygame.mixer.music.load("sound/title_screen.wav")
+            pygame.mixer.music.load(background_snd['title'])
 
         elif self.state['run'] and self.level == 1:
-            pygame.mixer.music.load("sound/level_1.wav")
+            pygame.mixer.music.load(background_snd['level1'])
 
-        else:
-            pygame.mixer.music.load("sound/ending.wav")
+        elif self.state['game_over']:
+            pygame.mixer.music.load(background_snd['ending'])
 
         pygame.mixer.music.play(loops=-1, fade_ms=800)
+
 
 
     def pause(self): # change to display menu during game
@@ -107,14 +101,21 @@ class Game:
 
 
     def spawn_enemys(self):
+
+        global enemy_count_small
         enemy_offset = Vector(0,0)
+
         for x in range(random.randint(2,5)):
-            #enemy_type = random.choice(self.enemy_img_list)
-            enemy_type = 1
             enemy_pos = Vector(30,0)
-            enemy_grp.add(Enemy(enemy_pos + enemy_offset, 5, 30, enemy_type))
-            #self.enemys.append(Enemy(enemy_pos + enemy_offset, 5, 30, enemy_type))
+            enemy_grp.add(Enemy(enemy_pos + enemy_offset, 5))
             enemy_offset.x += 100
+            enemy_count_small += 1
+
+    def spawn_boss_enemy(self):
+
+        if len(boss_enemy_grp) < 2:
+
+            BossEnemy((200,110), boss_enemy_grp)
 
     def collision_player_enemy(self):
 
@@ -122,6 +123,13 @@ class Game:
 
         if collitions:
             player.hit(screen)
+
+    def collision_player_boss_enemy(self):
+
+        collitions = pygame.sprite.groupcollide(boss_enemy_grp, player_grp, False, False)
+
+        if collitions:
+                player.lives = 0
 
     def collision_player_shots(self):
 
@@ -132,6 +140,15 @@ class Game:
         for enemy in hits:
             Enemy.hit(enemy, screen)  # type: ignore
             player.score += 1
+
+    def collision_player_shot_boss(self):
+
+        collitions = pygame.sprite.groupcollide(boss_enemy_grp, player_shot_grp, False, True)
+
+        hits = collitions.keys()
+        
+        for enemy in hits:
+            enemy.hit(screen)  # type: ignor
         
     def collision_enemy_shots(self):
 
@@ -140,7 +157,7 @@ class Game:
         hits = collitions.keys()
         
         for enemy in hits:
-            Player.hit(player, screen)  # type: ignore
+            Player.hit(enemy, screen)  # type: ignore
 
 
 # ---------
@@ -182,8 +199,6 @@ def draw_start_screen():
     
     if menu_show_info:
 
-        #start_menu_sprites.clear(screen, start_screen_surf)
-
         info_surf = pygame.surface.Surface((700,370))
         info_surf.fill(SPACE_BLUE)
 
@@ -196,6 +211,11 @@ def draw_start_screen():
 
     return ship_selection
 
+def draw_game_over():
+
+    screen.blit(game.background_menu, (0,0))
+    screen.blit(game.game_over_surf, (60, 80))
+    game.play_music()
 
 # ---------
 # INIZIALISATION
@@ -207,6 +227,8 @@ pygame.display.set_caption('INVADERS')
 
 screen = pygame.display.set_mode((WIDTH,HEIGHT))
 clock = pygame.time.Clock()
+
+# Inizialising the start screen variables / Path to media stored in constants.py
 
 start_menu_sprites = pygame.sprite.Group()
 start_screen_surf = pygame.image.load(background['start']).convert_alpha()
@@ -235,18 +257,24 @@ player = Player(ship_selection)
 player_grp.add(player)
 
 enemy_grp = pygame.sprite.Group()
+boss_enemy_grp = pygame.sprite.Group()
 
 enemy_shot_grp = pygame.sprite.Group()
 player_shot_grp = pygame.sprite.Group()
 
+# Counting the spawn of smalll enemys through the spawn_enemey function
+enemy_count_small = 0
+
 game.play_music()
 
 # ---------
-# TODO
+# OEN TASKS
 # ---------
 
 # Changing the Sound according to the Game States
 # Creating different game states Menu, play, Game over
+# counting score when killin boss enemy
+# Look at module pickle (img und sound not pickleble)
 
 
 
@@ -260,6 +288,9 @@ pygame.time.set_timer(enemy_shooting, random.randint(700, 1100))
 
 enemy_spawn = pygame.USEREVENT + 2
 pygame.time.set_timer(enemy_spawn, 5000)
+
+boss_enemy_spawn = pygame.USEREVENT + 4
+pygame.time.set_timer(boss_enemy_spawn, 10000)
 
 # Reload the players gun
 
@@ -275,7 +306,6 @@ while True:
 
     game_time = clock.tick(30)
     
-
     # Draw the main menu
 
     if game.state['start_menu']:
@@ -287,7 +317,9 @@ while True:
 
     if player.lives == 0:
         game.state['run'] = False
-        game.draw_game_over()
+        game.state['game_over'] = True
+        draw_game_over()
+        game.play_music()
 
     # Draw the active game loop while playing
 
@@ -297,16 +329,16 @@ while True:
 
         keys = pygame.key.get_pressed()
 
-        if keys[pygame.K_RIGHT] and not keys[pygame.K_LEFT]:  # type: ignore
+        if keys[pygame.K_RIGHT] and not keys[pygame.K_LEFT]:
             player.vel.x = player.speed
 
-        elif keys[pygame.K_LEFT] and not keys[pygame.K_RIGHT]:  # type: ignore
+        elif keys[pygame.K_LEFT] and not keys[pygame.K_RIGHT]:
             player.vel.x =- player.speed
 
         elif keys[pygame.K_UP] and not keys[pygame.K_DOWN]: 
             player.vel.y =- player.speed
 
-        elif keys[pygame.K_DOWN] and not keys[pygame.K_UP]:  # type: ignore
+        elif keys[pygame.K_DOWN] and not keys[pygame.K_UP]:
             player.vel.y = player.speed
 
         screen.blit(game.background_surf, (0,0))  
@@ -319,6 +351,9 @@ while True:
         enemy_grp.update()
         enemy_grp.draw(screen)
 
+        boss_enemy_grp.update()
+        boss_enemy_grp.draw(screen)
+
         player_shot_grp.update()
         player_shot_grp.draw(screen)
 
@@ -326,8 +361,10 @@ while True:
         enemy_shot_grp.draw(screen)
 
         game.collision_player_enemy()
+        game.collision_player_boss_enemy()
         game.collision_player_shots()
         game.collision_enemy_shots()
+        game.collision_player_shot_boss()
 
         player.last_ship = player.ship
 
@@ -337,7 +374,7 @@ while True:
 
     for event in pygame.event.get():
 
-        if event.type == pygame.QUIT:  # type: ignore
+        if event.type == pygame.QUIT:
             pygame.quit()
             exit()
         
@@ -377,12 +414,15 @@ while True:
                 player.shoot(player_shot_grp)
 
             if event.type == pygame.KEYDOWN and event.key == pygame.K_p:
-                player.ship = 'player2_100'
+                pass
                 #game.pause()
 
             # Enemy spawn
             if event.type == enemy_spawn:
                 game.spawn_enemys()
+
+            if event.type == boss_enemy_spawn:
+                game.spawn_boss_enemy()
 
             if event.type == reload:
                 player.loaded = True
@@ -390,7 +430,7 @@ while True:
             # Choose a random enemy and shoot
             if event.type == enemy_shooting and enemy_grp:
                 enemy = random.choice(enemy_grp.sprites())
-                enemy.shoot(enemy_shot_grp)                 # type: ignore
+                enemy.shoot(enemy_shot_grp)
 
   
     pygame.display.update()

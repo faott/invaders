@@ -1,5 +1,5 @@
 import pygame
-from settings import *
+from constants import *
 from rockets import Rockets
 from vector import Vector
 
@@ -19,7 +19,7 @@ class Player(pygame.sprite.Sprite):
         self.ship = ship
         self.last_ship = self.ship
         
-        self.explosion_img = pygame.image.load(explosion['enemy']).convert_alpha()
+        self.explosion_img = pygame.image.load(explosion_img['enemy']).convert_alpha()
         self.image = pygame.image.load(player_icon[ship]).convert_alpha()
         self.rect = self.image.get_rect(center=(WIDTH//2, HEIGHT - 100))
         self.shoot_sound = pygame.mixer.Sound("sound/player_shoot.wav")

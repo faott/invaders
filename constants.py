@@ -13,6 +13,16 @@ SPACE_BLUE = (2,32,59)
 
 colours_list = [WHITE, BLACK, RED, GREEN, BLUE, GRAY, ORANGE]
 
+
+# MEDIA Fonts
+
+font_types = {
+    'uroob':"font/Uroob-Regular.ttf",
+    'anarchonaut':"font/AnachronautRegular-5VRB.ttf"
+}
+
+# MEDIA Picture
+
 enemy__icon_small = [
     "media/enemy1_30.png",
     "media/enemy2_30.png",
@@ -24,12 +34,6 @@ enemy__icon_boss = [
     "media/enemy/boss_1_200.png",
     "media/enemy/boss_2_200.png",
 ]
-
-
-font_types = {
-    'uroob':"font/Uroob-Regular.ttf",
-    'anarchonaut':"font/AnachronautRegular-5VRB.ttf"
-}
 
 icons = {
     'mute':"media/icon/mute.png",
@@ -46,7 +50,7 @@ player_icon = {
     'player2_100':"media/player/player2_100.png",
 }
 
-explosion = {
+explosion_img = {
 
     'enemy': "media/explosion/explosion.png",
     'player1': "media/explosion/player1_expl_100.png",
@@ -58,14 +62,30 @@ background = {
     'start':"media/background0.png"
 }
 
+# MEDIA Soundfiles
+
+explosion_snd = {
+
+    'default': "sound/explosion.wav",
+}
+
+background_snd = {
+
+    'title': "sound/title_screen.wav",
+    'level1': "sound/level_1.wav",
+    'ending': "sound/ending.wav"
+}
 
 
-def get_text(text, size, colour=WHITE, type='uroob'):
 
-    font = pygame.font.Font(font_types[type], size)
-    surf = font.render(text, True, colour)
 
-    return surf
+
+# def get_text(text, size, colour=WHITE, type='uroob'):
+
+#     font = pygame.font.Font(font_types[type], size)
+#     surf = font.render(text, True, colour)
+
+#     return surf
 
 
 

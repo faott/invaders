@@ -1,9 +1,9 @@
 # invaders
 An python game build with pygame. Inspired from an 80th year arcade game.
 
-## IMPORTANT
+# IMPORTANT
 
-The game is still in development and has plenty of room for improvement.
+The game has been developed during a python class. So this is more focused on trying various concepts and mechanics. The code is also still in development and has plenty of room for improvement or might not even work properly.
 
 ## Install and Play
 

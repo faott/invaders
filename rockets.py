@@ -1,5 +1,5 @@
 import pygame
-from settings import *
+from constants import *
 from vector import Vector
 
 
