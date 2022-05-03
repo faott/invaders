@@ -39,6 +39,7 @@ class Game:
         #self.shots = []
         self.show_info = False
         self.ship = ship
+        self.player1_score = 0
        
         self.background_surf = pygame.image.load("media/background2.png").convert_alpha()
         self.background_menu = pygame.image.load("media/background3.png").convert_alpha()
@@ -50,9 +51,9 @@ class Game:
         self.game_over_surf = self.title_font.render("Game Over", True, WHITE)
         self.paused_surf = self.title_font.render("Paused", True, WHITE)
 
-    def draw_hud(self, score, lives):
+    def draw_hud(self, lives):
 
-        score_surf = self.default_font.render(f"Score: {score}", True, WHITE)
+        score_surf = self.default_font.render(f"Score: {self.player1_score}", True, WHITE)
         lives_surf = self.default_font.render(f"Lives: {lives}", True, WHITE)   
         screen.blit(score_surf, (20, 580))
         screen.blit(lives_surf, (730, 580))
@@ -94,7 +95,7 @@ class Game:
         game.state['start_menu'] = False
         game.state['run'] = True
         player.lives = 3
-        player.score = 0
+        game.player1_score = 0
         #game.shots.clear()
         #game.enemys.clear()
         #self.spawn_enemys()
@@ -139,7 +140,7 @@ class Game:
         
         for enemy in hits:
             Enemy.hit(enemy, screen)  # type: ignore
-            player.score += 1
+            game.player1_score += 1
 
     def collision_player_shot_boss(self):
 
@@ -149,6 +150,9 @@ class Game:
         
         for enemy in hits:
             enemy.hit(screen)  # type: ignor
+            if enemy.destroyed:
+                self.player1_score += 10
+                enemy.sprite_group.remove(enemy)
         
     def collision_enemy_shots(self):
 
@@ -346,7 +350,7 @@ while True:
         player_grp.update()
         player_grp.draw(screen)
 
-        game.draw_hud(player.score, player.lives)
+        game.draw_hud(player.lives)
 
         enemy_grp.update()
         enemy_grp.draw(screen)

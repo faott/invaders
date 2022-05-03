@@ -58,6 +58,7 @@ class BossEnemy(pygame.sprite.Sprite):
         self.image = pygame.image.load(enemy__icon_boss[0]).convert_alpha()
         self.rect = self.image.get_rect(center=(pos))
         self.lives = 4
+        self.destroyed = False
         self.pos = pos
         self.speed = 20
         self.timer = 0
@@ -89,7 +90,7 @@ class BossEnemy(pygame.sprite.Sprite):
             self.timer = 0
 
         if self.lives == 0:
-            self.sprite_group.remove(self)
+            self.destroyed = True
 
     # Reverse direction after hitting boundaries
 
