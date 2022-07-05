@@ -35,6 +35,7 @@ class Game:
         self.state = {'start_menu': True, 'run':False, 'game_over': False, 'muted': False, 'paused':False}
         self.level = 1
         self.difficulty = 0
+        self.soundtrack = ''
         #self.enemys = []
         #self.shots = []
         self.show_info = False
@@ -60,20 +61,25 @@ class Game:
 
     def play_music(self):
         
-        pygame.mixer.music.set_volume(0.3)
-        
-
+        pygame.mixer.music.set_volume(0.3)        
+    
         if self.state['start_menu']:
             pygame.mixer.music.load(background_snd['title'])
+            self.soundtrack = 'title'
+            pygame.mixer.music.play(loops=-1, fade_ms=800)
 
         elif self.state['run'] and self.level == 1:
             pygame.mixer.music.load(background_snd['level1'])
+            self.soundtrack = 'level1'
+            pygame.mixer.music.play(loops=-1, fade_ms=800)
 
         elif self.state['game_over']:
-            pygame.mixer.music.load(background_snd['ending'])
-
-        pygame.mixer.music.play(loops=-1, fade_ms=800)
-
+            if self.soundtrack == 'ending':
+                pass
+            else:
+                pygame.mixer.music.load(background_snd['ending'])
+                self.soundtrack = 'ending'
+                pygame.mixer.music.play(loops=-1, fade_ms=800)
 
 
     def pause(self): # change to display menu during game
@@ -95,11 +101,12 @@ class Game:
         game.state['start_menu'] = False
         game.state['run'] = True
         player.lives = 3
+        player.rect.center = (WIDTH//2, HEIGHT - 100)
         game.player1_score = 0
-        #game.shots.clear()
-        #game.enemys.clear()
-        #self.spawn_enemys()
-
+        enemy_grp.empty()
+        boss_enemy_grp.empty()
+        enemy_shot_grp.empty()
+        player_shot_grp.empty()
 
     def spawn_enemys(self):
 
@@ -219,7 +226,11 @@ def draw_game_over():
 
     screen.blit(game.background_menu, (0,0))
     screen.blit(game.game_over_surf, (60, 80))
+    screen.blit(get_text("Press <ENTER> to Restart!", 25), (290, 200))
+    screen.blit(get_text(f"Your Score: {game.player1_score}", 25), (80, 360))
+    screen.blit(player.image, (90, 390))
     game.play_music()
+
 
 # ---------
 # INIZIALISATION
@@ -309,7 +320,7 @@ pygame.time.set_timer(reload, 800)
 while True:
 
     game_time = clock.tick(30)
-    
+
     # Draw the main menu
 
     if game.state['start_menu']:
@@ -323,7 +334,7 @@ while True:
         game.state['run'] = False
         game.state['game_over'] = True
         draw_game_over()
-        game.play_music()
+        #game.play_music()
 
     # Draw the active game loop while playing
 
@@ -371,6 +382,7 @@ while True:
         game.collision_player_shot_boss()
 
         player.last_ship = player.ship
+
 
     # ---------
     # EVENT HANDLING
